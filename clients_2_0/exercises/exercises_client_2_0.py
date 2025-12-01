@@ -3,6 +3,19 @@ from clients_2_0.api_clients_2_0 import APIClient
 from typing import TypedDict
 from clients_2_0.private_http_builder_2_0 import get_private_http_client, AuthenticationUserDict
 
+class Exercise(TypedDict):
+    """
+    Description of the exercise structure.
+    """
+    id: str
+    title: str
+    courseId: str
+    maxScore: int
+    minScore: int
+    orderIndex: int
+    description: str
+    estimatedTime: str
+
 class GetExercisesQueryDict(TypedDict):
     """
     Structure of the request to get a list of exercises.
@@ -14,10 +27,10 @@ class CreateExercisesRequestDict(TypedDict):
     Structure of the request to create an exercise.
     """
     title: str
-    courseId: int
+    courseId: str
     maxScore: int
-    minScore: str
-    orderIndex: str
+    minScore: int
+    orderIndex: int
     description: str
     estimatedTime: str
 
@@ -32,12 +45,19 @@ class UpdateExercisesRequestDict(TypedDict):
     description: str
     estimatedTime: str
 
+class GetExercisesResponseDict(TypedDict):
+    """
+    Description of the structure of the getting exercise response.
+    """
+    exercises: list[Exercise]
+
+
 class ExercisesClient(APIClient):
     """
     Client for work with /api/v1/exercises
     """
 
-    def get_courses_api(self, query: GetExercisesQueryDict) -> httpx.Response:
+    def get_exercises_api(self, query: GetExercisesQueryDict) -> httpx.Response:
         """
         The method performs getting a list of exercises by course id.
         :param query: TypedDict with course_id
@@ -78,8 +98,12 @@ class ExercisesClient(APIClient):
         """
         return self.delete(f"/api/v1/exercises/{exercise_id}")
 
+    def create_exercise(self, request: CreateExercisesRequestDict) -> GetExercisesResponseDict:
+        response = self.create_exercise_api(request)
+        return response.json()
 
-def get_courses_client(user: AuthenticationUserDict) -> ExercisesClient:
+
+def get_exercises_client(user: AuthenticationUserDict) -> ExercisesClient:
     """
     The function creates an ExercisesClient instance with a pre-configured HTTP client.
     :return: A ready-to-use ExercisesClient.
