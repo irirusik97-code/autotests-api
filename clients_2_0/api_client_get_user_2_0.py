@@ -17,7 +17,6 @@ create_user_request = CreateUserRequestDict(
 # Используем метод create_user
 create_user_response = public_users_client.create_user(create_user_request)
 print('Create user data:', create_user_response)
-print(type(create_user_response))
 
 # Инициализируем пользовательские данные для аутентификации
 authentication_user = AuthenticationUserSchema(

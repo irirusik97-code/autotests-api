@@ -2,14 +2,14 @@ import httpx
 from clients_2_0.api_clients_2_0 import APIClient
 from typing import TypedDict
 from clients_2_0.private_http_builder_2_0 import get_private_http_client, AuthenticationUserSchema
-from pydantic import BaseModel, EmailStr
+from pydantic import EmailStr
 
 class User(TypedDict):
     """
     Description of the user structure.
     """
     id: str
-    email: EmailStr
+    email: str
     lastName: str
     firstName: str
     middleName: str
