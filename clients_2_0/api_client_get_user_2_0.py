@@ -1,4 +1,4 @@
-from clients_2_0.private_http_builder_2_0 import AuthenticationUserDict
+from clients_2_0.private_http_builder_2_0 import AuthenticationUserSchema
 from clients_2_0.users.private_users_client_2_0 import get_private_users_client
 from clients_2_0.users.public_users_client_2_0 import get_public_users_client, CreateUserRequestDict
 from tools.fakers import get_random_email
@@ -17,12 +17,14 @@ create_user_request = CreateUserRequestDict(
 # Используем метод create_user
 create_user_response = public_users_client.create_user(create_user_request)
 print('Create user data:', create_user_response)
+print(type(create_user_response))
 
 # Инициализируем пользовательские данные для аутентификации
-authentication_user = AuthenticationUserDict(
+authentication_user = AuthenticationUserSchema(
     email=create_user_request['email'],
     password=create_user_request['password']
 )
+
 # Инициализируем клиент PrivateUsersClient
 private_users_client = get_private_users_client(authentication_user)
 

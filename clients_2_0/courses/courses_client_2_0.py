@@ -1,7 +1,7 @@
 import httpx
 from clients_2_0.api_clients_2_0 import APIClient
 from typing import TypedDict
-from clients_2_0.private_http_builder_2_0 import get_private_http_client, AuthenticationUserDict
+from clients_2_0.private_http_builder_2_0 import get_private_http_client, AuthenticationUserSchema
 from clients_2_0.files.files_client_2_0 import File
 from clients_2_0.users.private_users_client_2_0 import User
 
@@ -105,7 +105,7 @@ class CoursesClient(APIClient):
         return response.json()
 
 
-def get_courses_client(user: AuthenticationUserDict) -> CoursesClient:
+def get_courses_client(user: AuthenticationUserSchema) -> CoursesClient:
     """
     The function creates an CoursesClient instance with a pre-configured HTTP client.
     :return: A ready-to-use CoursesClient.

@@ -1,6 +1,6 @@
 from clients_2_0.courses.courses_client_2_0 import get_courses_client, CreateCourseRequestDict
 from clients_2_0.files.files_client_2_0 import get_files_client, CreateFileRequestDict
-from clients_2_0.private_http_builder_2_0 import AuthenticationUserDict
+from clients_2_0.private_http_builder_2_0 import AuthenticationUserSchema
 from clients_2_0.users.public_users_client_2_0 import get_public_users_client, CreateUserRequestDict
 from tools.fakers import get_random_email
 
@@ -17,7 +17,7 @@ create_user_request = CreateUserRequestDict(
 create_user_response = public_users_client.create_user(create_user_request)
 
 # Инициализируем клиенты
-authentication_user = AuthenticationUserDict(
+authentication_user = AuthenticationUserSchema(
     email=create_user_request['email'],
     password=create_user_request['password']
 )

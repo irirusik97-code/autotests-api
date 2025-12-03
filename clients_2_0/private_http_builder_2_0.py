@@ -1,27 +1,27 @@
 from typing import TypedDict
-
+from pydantic import BaseModel, EmailStr
 from httpx import Client
+from clients_2_0.authentication.authentication_client_2_0 import get_authentication_client #, LoginRequestDict
+from clients_2_0.authentication.authentication_schema_2_0 import LoginRequestSchema
 
-from clients_2_0.authentication.authentication_client_2_0 import get_authentication_client, LoginRequestDict
 
-
-class AuthenticationUserDict(TypedDict):
-    email: str
+class AuthenticationUserSchema(BaseModel):
+    email: EmailStr
     password: str
 
 
-def get_private_http_client(user: AuthenticationUserDict) -> Client:
+def get_private_http_client(user: AuthenticationUserSchema) -> Client:
     """
     The function creates an httpx.Client instance with user authentication.
     :return: A ready-to-use httpx.Client object.
     """
-    login_request = LoginRequestDict(email=user['email'], password=user['password'])
+    login_request = LoginRequestSchema(email=user.email, password=user.password)
     authentication_client = get_authentication_client()
     login_response = authentication_client.login(login_request)
 
     return Client(
         timeout=100,
         base_url="http://localhost:8000",
-        headers={"Authorization": f"Bearer {login_response['token']['accessToken']}"}
+        headers={"Authorization": f"Bearer {login_response.token.access_token}"}
     )
 
