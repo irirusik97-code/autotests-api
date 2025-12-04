@@ -4,7 +4,7 @@ class UserSchema(BaseModel):
     """
     Description of the user structure.
     """
-    model_config = ConfigDict(populate_by_name=True) #
+    model_config = ConfigDict(populate_by_name=True) # позволяет передавать как camelCase, так и snake_case без ошибок.
 
     id: str
     email: EmailStr

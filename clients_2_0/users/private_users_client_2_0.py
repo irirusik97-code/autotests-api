@@ -59,7 +59,7 @@ class PrivateUsersClient(APIClient):
         :return:Object Response with response data (httpx.Response object).
         """
         print('PrivateUsersClient --> update_user_api() from private_users_client_2_0')
-        return self.patch(f"/api/v1/users/{user_id}", json=request.model_dump(by_alias=True))
+        return self.patch(f"/api/v1/users/{user_id}", json=request.model_dump(by_alias=True)) # Pydantic сам приводит имена полей в camelCase.
 
     def delete_user_api(self, user_id: str) -> httpx.Response:
         """
@@ -73,7 +73,7 @@ class PrivateUsersClient(APIClient):
     def get_user(self, user_id: str) -> GetUserResponseSchema:
         print('PrivateUsersClient --> get_user() from private_users_client_2_0')
         response = self.get_user_api(user_id)
-        return GetUserResponseSchema.model_validate_json(response.text)
+        return GetUserResponseSchema.model_validate_json(response.text) # автоматически преобразует JSON-строку в объект CourseSchema
 
 
 def get_private_users_client(user: AuthenticationUserSchema) -> PrivateUsersClient:
