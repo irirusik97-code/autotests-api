@@ -18,6 +18,7 @@ class APIClient:
         :param params: GET-parameters of request (for example, ?key=value).
         :return: Object Response with response data.
         """
+        print('APIClient --> get() from api_clients_2_0')
         return self.client.get(url, params=params)
 
 
@@ -35,6 +36,7 @@ class APIClient:
         :param files: Files to upload to the server.
         :return: Object Response with response data.
         """
+        print('APIClient --> post() from api_clients_2_0')
         return self.client.post(url, params=params, json=json, data=data, files=files)
 
 
@@ -50,6 +52,7 @@ class APIClient:
         :param data: Formatted form data (for example, application/x-www-form-urlencoded).
         :return: Object Response with response data.
         """
+        print('APIClient --> patch() from api_clients_2_0')
         return self.client.patch(url, params=params, json=json, data=data)
 
 
@@ -65,5 +68,6 @@ class APIClient:
         :param data: Formatted form data (for example, application/x-www-form-urlencoded).
         :return: Object Response with response data.
         """
+        print('APIClient --> delete() from api_clients_2_0')
         return self.client.delete(url, params=params, json=json, data=data)
 
