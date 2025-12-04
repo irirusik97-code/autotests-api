@@ -1,33 +1,34 @@
 import httpx
 from clients_2_0.api_clients_2_0 import APIClient
-from typing import TypedDict
+
 from clients_2_0.private_http_builder_2_0 import get_private_http_client, AuthenticationUserSchema
-from pydantic import EmailStr
 
-class User(TypedDict):
-    """
-    Description of the user structure.
-    """
-    id: str
-    email: str
-    lastName: str
-    firstName: str
-    middleName: str
+from clients_2_0.users.users_schema_2_0 import UpdateUserRequestSchema, GetUserResponseSchema
 
-class GetUserResponseDict(TypedDict):
-    """
-    Description of the structure of the user creation response.
-    """
-    user: User
-
-class UpdateUserRequestDict(TypedDict):
-    """
-    Structure of the request to update a user.
-    """
-    email: str | None
-    lastName: str | None
-    firstName: str | None
-    middleName: str | None
+# class User(TypedDict):
+#     """
+#     Description of the user structure.
+#     """
+#     id: str
+#     email: str
+#     lastName: str
+#     firstName: str
+#     middleName: str
+#
+# class GetUserResponseDict(TypedDict):
+#     """
+#     Description of the structure of the user creation response.
+#     """
+#     user: User
+#
+# class UpdateUserRequestDict(TypedDict):
+#     """
+#     Structure of the request to update a user.
+#     """
+#     email: str | None
+#     lastName: str | None
+#     firstName: str | None
+#     middleName: str | None
 
 class PrivateUsersClient(APIClient):
     """
@@ -50,7 +51,7 @@ class PrivateUsersClient(APIClient):
         print('PrivateUsersClient --> get_user_api() from private_users_client_2_0')
         return self.get(f"/api/v1/users/{user_id}")
 
-    def update_user_api(self, user_id: str, request: UpdateUserRequestDict) -> httpx.Response:
+    def update_user_api(self, user_id: str, request: UpdateUserRequestSchema) -> httpx.Response:
         """
         The method performs updating a user.
         :param user_id: str with user_id
@@ -58,7 +59,7 @@ class PrivateUsersClient(APIClient):
         :return:Object Response with response data (httpx.Response object).
         """
         print('PrivateUsersClient --> update_user_api() from private_users_client_2_0')
-        return self.patch(f"/api/v1/users/{user_id}", json=request)
+        return self.patch(f"/api/v1/users/{user_id}", json=request.model_dump(by_alias=True))
 
     def delete_user_api(self, user_id: str) -> httpx.Response:
         """
@@ -69,10 +70,10 @@ class PrivateUsersClient(APIClient):
         print('PrivateUsersClient --> delete_user_api() from private_users_client_2_0')
         return self.delete(f"/api/v1/users/{user_id}")
 
-    def get_user(self, user_id: str) -> GetUserResponseDict:
+    def get_user(self, user_id: str) -> GetUserResponseSchema:
         print('PrivateUsersClient --> get_user() from private_users_client_2_0')
         response = self.get_user_api(user_id)
-        return response.json()
+        return GetUserResponseSchema.model_validate_json(response.text)
 
 
 def get_private_users_client(user: AuthenticationUserSchema) -> PrivateUsersClient:

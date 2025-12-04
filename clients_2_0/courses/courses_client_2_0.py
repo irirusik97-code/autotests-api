@@ -3,7 +3,7 @@ from clients_2_0.api_clients_2_0 import APIClient
 from typing import TypedDict
 from clients_2_0.private_http_builder_2_0 import get_private_http_client, AuthenticationUserSchema
 from clients_2_0.files.files_client_2_0 import File
-from clients_2_0.users.private_users_client_2_0 import User
+from clients_2_0.users.users_schema_2_0 import UserSchema
 
 
 class Course(TypedDict):
@@ -17,7 +17,7 @@ class Course(TypedDict):
     description: str
     previewFile: File  # Вложенная структура файла
     estimatedTime: str
-    createdByUser: User  # Вложенная структура пользователя
+    createdByUser: UserSchema  # Вложенная структура пользователя
 
 class GetCoursesQueryDict(TypedDict):
     """
