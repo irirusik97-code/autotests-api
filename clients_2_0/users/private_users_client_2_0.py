@@ -59,7 +59,8 @@ class PrivateUsersClient(APIClient):
         :return:Object Response with response data (httpx.Response object).
         """
         print('PrivateUsersClient --> update_user_api() from private_users_client_2_0')
-        return self.patch(f"/api/v1/users/{user_id}", json=request.model_dump(by_alias=True)) # Pydantic сам приводит имена полей в camelCase.
+        return self.patch(f"/api/v1/users/{user_id}",
+                          json=request.model_dump(by_alias=True)) # Pydantic сам приводит имена полей в camelCase.
 
     def delete_user_api(self, user_id: str) -> httpx.Response:
         """

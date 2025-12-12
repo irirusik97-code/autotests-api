@@ -2,7 +2,8 @@ import httpx
 from clients_2_0.api_clients_2_0 import APIClient
 from typing import TypedDict
 from clients_2_0.private_http_builder_2_0 import get_private_http_client, AuthenticationUserSchema
-from clients_2_0.files.files_client_2_0 import File
+# from clients_2_0.files.files_client_2_0 import File
+from clients_2_0.files.files_schema_2_0 import FileSchema
 from clients_2_0.users.users_schema_2_0 import UserSchema
 
 
@@ -15,7 +16,7 @@ class Course(TypedDict):
     maxScore: int
     minScore: int
     description: str
-    previewFile: File  # Вложенная структура файла
+    previewFile: FileSchema  # Вложенная структура файла
     estimatedTime: str
     createdByUser: UserSchema  # Вложенная структура пользователя
 

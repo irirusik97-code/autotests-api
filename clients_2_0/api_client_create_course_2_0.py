@@ -1,5 +1,6 @@
 from clients_2_0.courses.courses_client_2_0 import get_courses_client, CreateCourseRequestDict
-from clients_2_0.files.files_client_2_0 import get_files_client, CreateFileRequestDict
+from clients_2_0.files.files_client_2_0 import get_files_client
+from clients_2_0.files.files_schema_2_0 import CreateFileRequestSchema
 from clients_2_0.private_http_builder_2_0 import AuthenticationUserSchema
 from clients_2_0.users.public_users_client_2_0 import get_public_users_client
 from clients_2_0.users.users_schema_2_0 import CreateUserRequestSchema
@@ -26,7 +27,7 @@ files_client = get_files_client(authentication_user)
 courses_client = get_courses_client(authentication_user)
 
 # Загружаем файл
-create_file_request = CreateFileRequestDict(
+create_file_request = CreateFileRequestSchema(
     filename="image.png",
     directory="courses",
     upload_file="../testdata/files/image.png"
@@ -41,7 +42,7 @@ create_course_request = CreateCourseRequestDict(
     minScore=10,
     description="Python API course",
     estimatedTime="2 weeks",
-    previewFileId=create_file_response['file']['id'],
+    previewFileId=create_file_response.file.id,
     createdByUserId=create_user_response.user.id
 )
 create_course_response = courses_client.create_course(create_course_request)
