@@ -5,54 +5,56 @@ from clients_2_0.private_http_builder_2_0 import get_private_http_client, Authen
 # from clients_2_0.files.files_client_2_0 import File
 from clients_2_0.files.files_schema_2_0 import FileSchema
 from clients_2_0.users.users_schema_2_0 import UserSchema
+from clients_2_0.courses.courses_schema_2_0 import (GetCoursesQuerySchema, CreateCourseRequestSchema,
+                                                    UpdateCourseRequestSchema, CreateCourseResponseSchema)
 
 
-class Course(TypedDict):
-    """
-    Description of the course structure.
-    """
-    id: str
-    title: str
-    maxScore: int
-    minScore: int
-    description: str
-    previewFile: FileSchema  # Вложенная структура файла
-    estimatedTime: str
-    createdByUser: UserSchema  # Вложенная структура пользователя
-
-class GetCoursesQueryDict(TypedDict):
-    """
-    Structure of the request to get a list of courses.
-    """
-    user_id: str
-
-class CreateCourseRequestDict(TypedDict):
-    """
-    Structure of the request to create a course.
-    """
-    title: str
-    maxScore: int
-    minScore: int
-    description: str
-    estimatedTime: str
-    previewFileId: str
-    createdByUserId: str
-
-class UpdateCourseRequestDict(TypedDict):
-    """
-    Structure of the request to update a course.
-    """
-    title: str | None
-    maxScore: int | None
-    minScore: int | None
-    description: str | None
-    estimatedTime: str | None
-
-class CreateCourseResponseDict(TypedDict):
-    """
-    Description of the structure of the course creation response.
-    """
-    course: Course
+# class Course(TypedDict):
+#     """
+#     Description of the course structure.
+#     """
+#     id: str
+#     title: str
+#     maxScore: int
+#     minScore: int
+#     description: str
+#     previewFile: FileSchema  # Вложенная структура файла
+#     estimatedTime: str
+#     createdByUser: UserSchema  # Вложенная структура пользователя
+#
+# class GetCoursesQueryDict(TypedDict):
+#     """
+#     Structure of the request to get a list of courses.
+#     """
+#     user_id: str
+#
+# class CreateCourseRequestDict(TypedDict):
+#     """
+#     Structure of the request to create a course.
+#     """
+#     title: str
+#     maxScore: int
+#     minScore: int
+#     description: str
+#     estimatedTime: str
+#     previewFileId: str
+#     createdByUserId: str
+#
+# class UpdateCourseRequestDict(TypedDict):
+#     """
+#     Structure of the request to update a course.
+#     """
+#     title: str | None
+#     maxScore: int | None
+#     minScore: int | None
+#     description: str | None
+#     estimatedTime: str | None
+#
+# class CreateCourseResponseDict(TypedDict):
+#     """
+#     Description of the structure of the course creation response.
+#     """
+#     course: Course
 
 
 class CoursesClient(APIClient):
@@ -60,13 +62,13 @@ class CoursesClient(APIClient):
     Client for work with /api/v1/courses
     """
 
-    def get_courses_api(self, query: GetCoursesQueryDict) -> httpx.Response:
+    def get_courses_api(self, query: GetCoursesQuerySchema) -> httpx.Response:
         """
         The method performs getting a list of courses by user id.
         :param query: TypedDict with user_id
         :return:Object Response with response data (httpx.Response object).
         """
-        return self.get("/api/v1/courses", params=query)
+        return self.get("/api/v1/courses", params=query.model_dump(by_alias=True))
 
     def get_course_api(self, course_id: str) -> httpx.Response:
         """
@@ -76,22 +78,22 @@ class CoursesClient(APIClient):
         """
         return self.get(f"/api/v1/courses/{course_id}")
 
-    def create_course_api(self, request: CreateCourseRequestDict) -> httpx.Response:
+    def create_course_api(self, request: CreateCourseRequestSchema) -> httpx.Response:
         """
         The method performs creating a course.
         :param request: TypedDict with title, maxScore, minScore, description, estimatedTime, previewFileId, createdByUserId.
         :return:Object Response with response data (httpx.Response object).
         """
-        return self.post("/api/v1/courses", json=request)
+        return self.post("/api/v1/courses", json=request.model_dump(by_alias=True))
 
-    def update_course_api(self, course_id: str, request: UpdateCourseRequestDict) -> httpx.Response:
+    def update_course_api(self, course_id: str, request: UpdateCourseRequestSchema) -> httpx.Response:
         """
         The method performs updating a course.
         :param course_id: str with course_id
         :param request: TypedDict with title, maxScore, minScore, description, estimatedTime.
         :return:Object Response with response data (httpx.Response object).
         """
-        return self.patch(f"/api/v1/courses/{course_id}", json=request)
+        return self.patch(f"/api/v1/courses/{course_id}", json=request.model_dump(by_alias=True))
 
     def delete_course_api(self, course_id: str) -> httpx.Response:
         """
@@ -101,9 +103,9 @@ class CoursesClient(APIClient):
         """
         return self.delete(f"/api/v1/courses/{course_id}")
 
-    def create_course(self, request: CreateCourseRequestDict) -> CreateCourseResponseDict:
+    def create_course(self, request: CreateCourseRequestSchema) -> CreateCourseResponseSchema:
         response = self.create_course_api(request)
-        return response.json()
+        return CreateCourseResponseSchema.model_validate_json(response.text)
 
 
 def get_courses_client(user: AuthenticationUserSchema) -> CoursesClient:

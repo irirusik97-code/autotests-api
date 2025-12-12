@@ -1,4 +1,5 @@
-from clients_2_0.courses.courses_client_2_0 import get_courses_client, CreateCourseRequestDict
+from clients_2_0.courses.courses_client_2_0 import get_courses_client
+from clients_2_0.courses.courses_schema_2_0 import CreateCourseRequestSchema
 from clients_2_0.exercises.exercises_client_2_0 import get_exercises_client, CreateExercisesRequestDict
 from clients_2_0.files.files_client_2_0 import get_files_client
 from clients_2_0.files.files_schema_2_0 import CreateFileRequestSchema
@@ -38,7 +39,7 @@ create_file_response = files_client.create_file(create_file_request)
 # print('Create file data:', create_file_response)
 
 # Создаем курс
-create_course_request = CreateCourseRequestDict(
+create_course_request = CreateCourseRequestSchema(
     title="Python",
     maxScore=100,
     minScore=10,
@@ -53,7 +54,7 @@ create_course_response = courses_client.create_course(create_course_request)
 # Создаем задание
 create_exercise_request = CreateExercisesRequestDict(
     title="Exercise 1",
-    courseId=create_course_response['course']['id'],
+    courseId=create_course_response.course.id,
     maxScore=5,
     minScore=1,
     orderIndex=0,
