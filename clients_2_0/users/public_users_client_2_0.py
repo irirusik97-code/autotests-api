@@ -40,11 +40,11 @@ class PublicUsersClient(APIClient):
         :param request: TypedDict with email, password, lastName, firstName, middleName.
         :return:Object Response with response data (httpx.Response object).
         """
-        print('PublicUsersClient --> create_user_api() from public_users_client_2_0')
+        # print('PublicUsersClient --> create_user_api() from public_users_client_2_0')
         return self.post("/api/v1/users", json=request.model_dump(by_alias=True))
 
     def create_user(self, request: CreateUserRequestSchema) -> CreateUserResponseSchema:
-        print('PublicUsersClient --> create_user() from public_users_client_2_0')
+        # print('PublicUsersClient --> create_user() from public_users_client_2_0')
         response = self.create_user_api(request)
         return CreateUserResponseSchema.model_validate_json(response.text)
 
@@ -54,6 +54,6 @@ def get_public_users_client() -> PublicUsersClient:
     The function creates an PublicUsersClient instance with a pre-configured HTTP client.
     :return: A ready-to-use PublicUsersClient.
     """
-    print('get_public_users_client() from public_users_client_2_0')
+    # print('get_public_users_client() from public_users_client_2_0')
     return PublicUsersClient(client=get_public_http_client())
 

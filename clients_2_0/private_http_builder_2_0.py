@@ -15,7 +15,7 @@ def get_private_http_client(user: AuthenticationUserSchema) -> Client:
     The function creates an httpx.Client instance with user authentication.
     :return: A ready-to-use httpx.Client object.
     """
-    print('get_private_http_client() from private_http_builder_2_0')
+    # print('get_private_http_client() from private_http_builder_2_0')
     login_request = LoginRequestSchema(email=user.email, password=user.password)
     authentication_client = get_authentication_client()
     login_response = authentication_client.login(login_request)

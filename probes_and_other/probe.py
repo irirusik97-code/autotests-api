@@ -78,26 +78,51 @@ from pydantic import BaseModel, ConfigDict
 from pydantic.alias_generators import to_camel
 
 
-class CourseSchema(BaseModel):
-    # Автоматическое преобразование snake_case → camelCase
-    model_config = ConfigDict(alias_generator=to_camel, populate_by_name=True)
+# class CourseSchema(BaseModel):
+#     # Автоматическое преобразование snake_case → camelCase
+#     model_config = ConfigDict(alias_generator=to_camel, populate_by_name=True)
+#
+#     id: str
+#     title: str
+#     max_score: int
+#     min_score: int
+#     description: str
+#     estimated_time: str
+#
+#
+# course_data = {
+#     "id": "course-id",
+#     "title": "Playwright",
+#     "maxScore": 100,
+#     "minScore": 10,
+#     "description": "Playwright",
+#     "estimatedTime": "1 week"
+# }
+#
+# course_model = CourseSchema(**course_data)
+# print(course_model.model_dump(by_alias=True))
 
-    id: str
-    title: str
-    max_score: int
-    min_score: int
-    description: str
-    estimated_time: str
+from jsonschema import validate, ValidationError
 
-
-course_data = {
-    "id": "course-id",
-    "title": "Playwright",
-    "maxScore": 100,
-    "minScore": 10,
-    "description": "Playwright",
-    "estimatedTime": "1 week"
+# Пример схемы
+schema = {
+  "type": "object",
+  "properties": {
+    "name": { "type": "string" },
+    "age": { "type": "number" }
+  },
+  "required": ["name"]
 }
 
-course_model = CourseSchema(**course_data)
-print(course_model.model_dump(by_alias=True))
+# Пример данных
+data = {
+  "name": "John Doe",
+  "age": 30
+}
+
+try:
+    validate(instance=data, schema=schema)
+    print("Данные соответствуют схеме.")
+except ValidationError as e:
+    print(f"Ошибка валидации: {e.message}")
+

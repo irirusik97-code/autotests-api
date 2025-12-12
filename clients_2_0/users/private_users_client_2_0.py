@@ -39,7 +39,7 @@ class PrivateUsersClient(APIClient):
         The method performs getting a current user.
         :return:Object Response with response data (httpx.Response object).
         """
-        print('PrivateUsersClient --> get_user_me_api() from private_users_client_2_0')
+        # print('PrivateUsersClient --> get_user_me_api() from private_users_client_2_0')
         return self.get("/api/v1/users/me")
 
     def get_user_api(self, user_id: str) -> httpx.Response:
@@ -48,7 +48,7 @@ class PrivateUsersClient(APIClient):
         :param user_id: str with user_id
         :return:Object Response with response data (httpx.Response object).
         """
-        print('PrivateUsersClient --> get_user_api() from private_users_client_2_0')
+        # print('PrivateUsersClient --> get_user_api() from private_users_client_2_0')
         return self.get(f"/api/v1/users/{user_id}")
 
     def update_user_api(self, user_id: str, request: UpdateUserRequestSchema) -> httpx.Response:
@@ -58,7 +58,7 @@ class PrivateUsersClient(APIClient):
         :param request: TypedDict with email, lastName, firstName, middleName.
         :return:Object Response with response data (httpx.Response object).
         """
-        print('PrivateUsersClient --> update_user_api() from private_users_client_2_0')
+        # print('PrivateUsersClient --> update_user_api() from private_users_client_2_0')
         return self.patch(f"/api/v1/users/{user_id}",
                           json=request.model_dump(by_alias=True)) # Pydantic сам приводит имена полей в camelCase.
 
@@ -68,11 +68,11 @@ class PrivateUsersClient(APIClient):
         :param user_id: str with user_id
         :return:Object Response with response data (httpx.Response object).
         """
-        print('PrivateUsersClient --> delete_user_api() from private_users_client_2_0')
+        # print('PrivateUsersClient --> delete_user_api() from private_users_client_2_0')
         return self.delete(f"/api/v1/users/{user_id}")
 
     def get_user(self, user_id: str) -> GetUserResponseSchema:
-        print('PrivateUsersClient --> get_user() from private_users_client_2_0')
+        # print('PrivateUsersClient --> get_user() from private_users_client_2_0')
         response = self.get_user_api(user_id)
         return GetUserResponseSchema.model_validate_json(response.text) # автоматически преобразует JSON-строку в объект CourseSchema
 
@@ -82,6 +82,6 @@ def get_private_users_client(user: AuthenticationUserSchema) -> PrivateUsersClie
     The function creates an PrivateUsersClient instance with a pre-configured HTTP client.
     :return: A ready-to-use PrivateUsersClient.
     """
-    print('get_private_users_client() from private_users_client_2_0')
+    # print('get_private_users_client() from private_users_client_2_0')
     return PrivateUsersClient(client=get_private_http_client(user))
 
