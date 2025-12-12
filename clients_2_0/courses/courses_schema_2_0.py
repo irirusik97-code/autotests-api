@@ -1,4 +1,4 @@
-from pydantic import BaseModel, HttpUrl, Field
+from pydantic import BaseModel, HttpUrl, Field, ConfigDict
 from clients_2_0.files.files_schema_2_0 import FileSchema
 from clients_2_0.users.users_schema_2_0 import UserSchema
 
@@ -6,6 +6,8 @@ class CourseSchema(BaseModel):
     """
     Description of the course structure.
     """
+    model_config = ConfigDict(populate_by_name=True)
+
     id: str
     title: str
     max_score: int = Field(alias="maxScore")
@@ -25,6 +27,8 @@ class CreateCourseRequestSchema(BaseModel):
     """
     Structure of the request to create a course.
     """
+    model_config = ConfigDict(populate_by_name=True)
+
     title: str
     max_score: int = Field(alias="maxScore")
     min_score: int = Field(alias="minScore")
@@ -37,6 +41,8 @@ class UpdateCourseRequestSchema(BaseModel):
     """
     Structure of the request to update a course.
     """
+    model_config = ConfigDict(populate_by_name=True)
+
     title: str | None
     max_score: int | None = Field(alias="maxScore")
     min_score: int | None = Field(alias="minScore")

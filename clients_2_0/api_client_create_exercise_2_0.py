@@ -1,6 +1,7 @@
 from clients_2_0.courses.courses_client_2_0 import get_courses_client
 from clients_2_0.courses.courses_schema_2_0 import CreateCourseRequestSchema
-from clients_2_0.exercises.exercises_client_2_0 import get_exercises_client, CreateExercisesRequestDict
+from clients_2_0.exercises.exercises_client_2_0 import get_exercises_client
+from clients_2_0.exercises.exercises_schema_2_0 import CreateExercisesRequestSchema
 from clients_2_0.files.files_client_2_0 import get_files_client
 from clients_2_0.files.files_schema_2_0 import CreateFileRequestSchema
 from clients_2_0.private_http_builder_2_0 import AuthenticationUserSchema
@@ -52,7 +53,7 @@ create_course_response = courses_client.create_course(create_course_request)
 # print('Create course data:', create_course_response)
 
 # Создаем задание
-create_exercise_request = CreateExercisesRequestDict(
+create_exercise_request = CreateExercisesRequestSchema(
     title="Exercise 1",
     courseId=create_course_response.course.id,
     maxScore=5,
