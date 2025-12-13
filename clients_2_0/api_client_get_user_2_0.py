@@ -2,14 +2,14 @@ from clients_2_0.private_http_builder_2_0 import AuthenticationUserSchema
 from clients_2_0.users.private_users_client_2_0 import get_private_users_client
 from clients_2_0.users.public_users_client_2_0 import get_public_users_client
 from clients_2_0.users.users_schema_2_0 import CreateUserRequestSchema
-from tools.fakers import get_random_email
+from tools.fakers import fake
 
 # Инициализируем клиент PublicUsersClient
 public_users_client = get_public_users_client()
 
 # Инициализируем запрос на создание пользователя
 create_user_request = CreateUserRequestSchema(
-    email=get_random_email(),
+    email=fake.email(),
     password="string",
     last_name="string",
     first_name="string",

@@ -2,7 +2,7 @@ import jsonschema
 from clients_2_0.users.public_users_client_2_0 import get_public_users_client
 from clients_2_0.users.users_schema_2_0 import CreateUserRequestSchema, CreateUserResponseSchema
 from tools.assertions.schema import validate_json_schema
-from tools.fakers import get_random_email
+from tools.fakers import fake
 from clients_2_0.private_http_builder_2_0 import AuthenticationUserSchema
 from clients_2_0.users.private_users_client_2_0 import get_private_users_client
 from clients_2_0.users.users_schema_2_0 import GetUserResponseSchema
@@ -10,7 +10,7 @@ from clients_2_0.users.users_schema_2_0 import GetUserResponseSchema
 public_users_client = get_public_users_client()
 
 create_user_request = CreateUserRequestSchema(
-    email=get_random_email(),
+    email=fake.email(),
     password="string",
     last_name="string",
     first_name="string",

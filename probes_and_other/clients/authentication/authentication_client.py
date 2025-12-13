@@ -1,7 +1,7 @@
-from clients.api_client import APIClient
+from probes_and_other.clients.api_client import APIClient
 from httpx import Response
 from typing import TypedDict
-from clients.public_http_builder import get_public_http_client  # Импортируем builder
+from probes_and_other.clients.public_http_builder import get_public_http_client  # Импортируем builder
 
 
 class Token(TypedDict):  # Добавили структуру с токенами аутентификации

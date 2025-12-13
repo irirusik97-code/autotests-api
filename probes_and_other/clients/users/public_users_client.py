@@ -1,7 +1,7 @@
-from clients.api_client import APIClient
+from probes_and_other.clients.api_client import APIClient
 from typing import TypedDict
 from httpx import Response
-from clients.public_http_builder import get_public_http_client
+from probes_and_other.clients.public_http_builder import get_public_http_client
 
 
 class CreateUserRequestDict(TypedDict):

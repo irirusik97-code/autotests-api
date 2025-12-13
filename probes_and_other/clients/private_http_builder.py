@@ -2,7 +2,7 @@ from typing import TypedDict
 
 from httpx import Client
 
-from clients.authentication.authentication_client import get_authentication_client, LoginRequestDict
+from probes_and_other.clients.authentication.authentication_client import get_authentication_client, LoginRequestDict
 
 
 class AuthenticationUserDict(TypedDict):  # Структура данных пользователя для авторизации
