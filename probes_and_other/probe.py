@@ -102,27 +102,49 @@ from pydantic.alias_generators import to_camel
 # course_model = CourseSchema(**course_data)
 # print(course_model.model_dump(by_alias=True))
 
-from jsonschema import validate, ValidationError
+# from jsonschema import validate, ValidationError
+#
+# # Пример схемы
+# schema = {
+#   "type": "object",
+#   "properties": {
+#     "name": { "type": "string" },
+#     "age": { "type": "number" }
+#   },
+#   "required": ["name"]
+# }
+#
+# # Пример данных
+# data = {
+#   "name": "John Doe",
+#   "age": 30
+# }
+#
+# try:
+#     validate(instance=data, schema=schema)
+#     print("Данные соответствуют схеме.")
+# except ValidationError as e:
+#     print(f"Ошибка валидации: {e.message}")
 
-# Пример схемы
+
+from jsonschema import validate
+from jsonschema.validators import Draft202012Validator
+
 schema = {
-  "type": "object",
-  "properties": {
-    "name": { "type": "string" },
-    "age": { "type": "number" }
-  },
-  "required": ["name"]
+    "type": "object",
+    "properties": {
+        "id": {"type": "string"},
+        "email": {"type": "string", "format": "email"},
+        "age": {"type": "integer"}
+    },
+    "required": ["id", "email"]
 }
 
-# Пример данных
-data = {
-  "name": "John Doe",
-  "age": 30
+response = {
+    "id": "12345",
+    "email": "user-email",
+    "age": 25
 }
 
-try:
-    validate(instance=data, schema=schema)
-    print("Данные соответствуют схеме.")
-except ValidationError as e:
-    print(f"Ошибка валидации: {e.message}")
+validate(instance=response, schema=schema, format_checker=Draft202012Validator.FORMAT_CHECKER)
 
