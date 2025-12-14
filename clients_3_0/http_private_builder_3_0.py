@@ -1,6 +1,6 @@
 from httpx import Client
 from clients_3_0.schema.all_schemas_3_0 import *
-from clients_3_0.authentification.authentication_client_3_0 import get_authentication_client
+from clients_3_0.authentication.authentication_client_3_0 import get_authentication_client
 from tools.helpers.parsing_api_response import parse_api_response
 
 # private
