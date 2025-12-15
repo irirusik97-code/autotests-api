@@ -6,6 +6,7 @@ from clients_3_0.schema.all_schemas_3_0 import *
 from clients_3_0.authentication.authentication_client_3_0 import AuthenticationClient, get_authentication_client
 from clients_3_0.users.public_users_client_3_0 import get_public_users_client, PublicUsersClient
 from tools.helpers.parsing_api_response import parse_api_response
+from clients_3_0.users.private_users_client_3_0 import get_private_users_client, PrivateUsersClient
 
 
 # Модель для агрегации возвращаемых данных фикстурой function_user
@@ -21,6 +22,10 @@ class UserFixture(BaseModel):
     def password(self) -> str:  # Быстрый доступ к password пользователя
         return self.request.password
 
+    @property
+    def authentication_user(self) -> AuthenticationUserSchema:
+        return AuthenticationUserSchema(email=self.email, password=self.password)
+
 
 @pytest.fixture  # Объявляем фикстуру, по умолчанию скоуп function, то что нам нужно
 def authentication_client() -> AuthenticationClient:  # Аннотируем возвращаемое фикстурой значение
@@ -32,6 +37,10 @@ def authentication_client() -> AuthenticationClient:  # Аннотируем в�
 def public_users_client() -> PublicUsersClient:  # Аннотируем возвращаемое фикстурой значение
     # Создаем новый API клиент для работы с публичным API пользователей
     return get_public_users_client()
+
+@pytest.fixture
+def private_users_client(function_user: UserFixture) -> PrivateUsersClient:
+    return get_private_users_client(function_user.authentication_user)
 
 
 # Фикстура для создания пользователя

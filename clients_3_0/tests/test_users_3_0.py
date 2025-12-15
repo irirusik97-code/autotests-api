@@ -1,12 +1,14 @@
 from http import HTTPStatus
 
 from clients_3_0.users.public_users_client_3_0 import PublicUsersClient
+from clients_3_0.users.private_users_client_3_0 import PrivateUsersClient
 from clients_3_0.schema.all_schemas_3_0 import *
 from tools.assertions.schema import validate_json_schema
 from tools.assertions.base import assert_status_code
-from tools.assertions.users import assert_create_user_response
+from tools.assertions.users import assert_create_user_response, assert_get_user_response
 import pytest
 from tools.helpers.parsing_api_response import parse_api_response
+from clients_3_0.tests.conftest import UserFixture
 
 @pytest.mark.users
 @pytest.mark.regression
@@ -21,4 +23,19 @@ def test_create_user(public_users_client: PublicUsersClient):
     assert_create_user_response(request, pydantic_object_response_data)
 
     validate_json_schema(response.json(), pydantic_object_response_data.model_json_schema())
+
+@pytest.mark.users
+@pytest.mark.regression
+def test_get_user_me(function_user: UserFixture, private_users_client: PrivateUsersClient):
+
+    response = private_users_client.get_user_me_api()
+    pydantic_object_response_data = parse_api_response(GetUserResponseSchema, response)
+
+    assert_status_code(response.status_code, HTTPStatus.OK)
+
+    assert_get_user_response(pydantic_object_response_data, function_user.response)
+
+    validate_json_schema(response.json(), pydantic_object_response_data.model_json_schema())
+
+
 
