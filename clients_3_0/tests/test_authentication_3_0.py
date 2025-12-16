@@ -6,7 +6,7 @@ from tools.assertions.schema import validate_json_schema
 from tools.assertions.base import assert_status_code
 from tools.assertions.authentication import assert_login_response
 import pytest
-from clients_3_0.tests.conftest import UserFixture
+from clients_3_0.fixtures.users import UserFixture
 from tools.helpers.parsing_api_response import parse_api_response
 
 @pytest.mark.regression

@@ -8,7 +8,7 @@ from tools.assertions.base import assert_status_code
 from tools.assertions.users import assert_create_user_response, assert_get_user_response, assert_update_user_response
 import pytest
 from tools.helpers.parsing_api_response import parse_api_response
-from clients_3_0.tests.conftest import UserFixture
+from clients_3_0.fixtures.users import UserFixture
 
 
 @pytest.mark.users

@@ -1,9 +1,5 @@
-import pytest # Импортируем pytest
-from pydantic import BaseModel, EmailStr
+import pytest
 from clients_3_0.schema.all_schemas_3_0 import *
-
-# Импортируем API клиенты
-from clients_3_0.authentication.authentication_client_3_0 import AuthenticationClient, get_authentication_client
 from clients_3_0.users.public_users_client_3_0 import get_public_users_client, PublicUsersClient
 from tools.helpers.parsing_api_response import parse_api_response
 from clients_3_0.users.private_users_client_3_0 import get_private_users_client, PrivateUsersClient
@@ -38,12 +34,6 @@ def function_user(public_users_client: PublicUsersClient) -> UserFixture:
                        response=pydantic_object_create_user_api_response)  # Возвращаем все нужные данные
 
 @pytest.fixture  # Объявляем фикстуру, по умолчанию скоуп function, то что нам нужно
-def authentication_client() -> AuthenticationClient:  # Аннотируем возвращаемое фикстурой значение
-    # Создаем новый API клиент для работы с аутентификацией
-    return get_authentication_client()
-
-
-@pytest.fixture  # Объявляем фикстуру, по умолчанию скоуп function, то что нам нужно
 def public_users_client() -> PublicUsersClient:  # Аннотируем возвращаемое фикстурой значение
     # Создаем новый API клиент для работы с публичным API пользователей
     return get_public_users_client()
@@ -51,7 +41,3 @@ def public_users_client() -> PublicUsersClient:  # Аннотируем возв
 @pytest.fixture
 def private_users_client(function_user: UserFixture) -> PrivateUsersClient:
     return get_private_users_client(function_user.authentication_user)
-
-
-
-
