@@ -15,11 +15,11 @@ def test_login(function_user: UserFixture, authentication_client: Authentication
 
     request = LoginRequestSchema(email=function_user.email, password=function_user.password) # login_request
 
-    response = authentication_client.login_api(request) # login_api_response
-    pydantic_object_response_data = parse_api_response(LoginResponseSchema, response)
+    response_object = authentication_client.login_api(request) # login_api_response
+    response = parse_api_response(LoginResponseSchema, response_object)
 
-    assert_status_code(response.status_code, HTTPStatus.OK)
-    assert_login_response(pydantic_object_response_data)
+    assert_status_code(response_object.status_code, HTTPStatus.OK)
+    assert_login_response(response)
 
-    validate_json_schema(response.json(),
-                         pydantic_object_response_data.model_json_schema())
+    validate_json_schema(response_object.json(),
+                         response.model_json_schema())
