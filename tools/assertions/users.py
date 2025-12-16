@@ -42,3 +42,16 @@ def assert_get_user_response(
     """
     assert_user(get_user_response.user, create_user_response.user)
 
+def assert_update_user_response(request: UpdateUserRequestSchema, response: GetUserResponseSchema):
+    """
+    Проверяет, что ответ на создание пользователя соответствует запросу.
+
+    :param request: Исходный запрос на создание пользователя.
+    :param response: Ответ API с данными пользователя.
+    :raises AssertionError: Если хотя бы одно поле не совпадает.
+    """
+    assert_equal(response.user.email, request.email, "email")
+    assert_equal(response.user.last_name, request.last_name, "last_name")
+    assert_equal(response.user.first_name, request.first_name, "first_name")
+    assert_equal(response.user.middle_name, request.middle_name, "middle_name")
+

@@ -57,17 +57,13 @@ class APIClient:
 
 
     def delete(self, url: httpx.URL | str,
-               params: httpx.QueryParams | None=None,
-               json: Any | None = None,
-               data: RequestData | None = None) -> httpx.Response:
+               params: httpx.QueryParams | None=None) -> httpx.Response:
         """
         DELETE-request.
         :param url: URL of endpoint.
         :param params: parameters of request (for example, ?key=value).
-        :param json: JSON data.
-        :param data: Formatted form data (for example, application/x-www-form-urlencoded).
         :return: Object Response with response data.
         """
         # print('APIClient --> delete() from api_clients_2_0')
-        return self.client.delete(url, params=params, json=json, data=data)
+        return self.client.delete(url, params=params)
 
