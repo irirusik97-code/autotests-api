@@ -1,8 +1,7 @@
-from typing import TypedDict
 from pydantic import BaseModel, EmailStr
 from httpx import Client
-from clients_2_0.authentication.authentication_client_2_0 import get_authentication_client #, LoginRequestDict
-from clients_2_0.authentication.authentication_schema_2_0 import LoginRequestSchema
+from probes_and_other.clients_2_0.authentication.authentication_client_2_0 import get_authentication_client #, LoginRequestDict
+from probes_and_other.clients_2_0.authentication.authentication_schema_2_0 import LoginRequestSchema
 
 
 class AuthenticationUserSchema(BaseModel):

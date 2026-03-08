@@ -1,6 +1,6 @@
-from pydantic import BaseModel, HttpUrl, Field, ConfigDict
-from clients_2_0.files.files_schema_2_0 import FileSchema
-from clients_2_0.users.users_schema_2_0 import UserSchema
+from pydantic import BaseModel, Field, ConfigDict
+from probes_and_other.clients_2_0.files.files_schema_2_0 import FileSchema
+from probes_and_other.clients_2_0.users.users_schema_2_0 import UserSchema
 from tools.fakers import fake
 
 class CourseSchema(BaseModel):

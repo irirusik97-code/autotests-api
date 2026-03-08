@@ -1,4 +1,4 @@
-from clients_2_0.authentication.authentication_schema_2_0 import LoginResponseSchema
+from probes_and_other.clients_2_0.authentication.authentication_schema_2_0 import LoginResponseSchema
 from tools.assertions.base import assert_equal, assert_is_true
 
 

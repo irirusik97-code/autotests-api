@@ -1,11 +1,10 @@
-from clients_2_0.courses.courses_client_2_0 import get_courses_client
-from clients_2_0.courses.courses_schema_2_0 import CreateCourseRequestSchema
-from clients_2_0.files.files_client_2_0 import get_files_client
-from clients_2_0.files.files_schema_2_0 import CreateFileRequestSchema
-from clients_2_0.private_http_builder_2_0 import AuthenticationUserSchema
-from clients_2_0.users.public_users_client_2_0 import get_public_users_client
-from clients_2_0.users.users_schema_2_0 import CreateUserRequestSchema
-from tools.fakers import fake
+from probes_and_other.clients_2_0.courses.courses_client_2_0 import get_courses_client
+from probes_and_other.clients_2_0.courses.courses_schema_2_0 import CreateCourseRequestSchema
+from probes_and_other.clients_2_0.files.files_client_2_0 import get_files_client
+from probes_and_other.clients_2_0.files.files_schema_2_0 import CreateFileRequestSchema
+from probes_and_other.clients_2_0.private_http_builder_2_0 import AuthenticationUserSchema
+from probes_and_other.clients_2_0.users.public_users_client_2_0 import get_public_users_client
+from probes_and_other.clients_2_0.users.users_schema_2_0 import CreateUserRequestSchema
 
 public_users_client = get_public_users_client()
 
@@ -34,7 +33,7 @@ courses_client = get_courses_client(authentication_user)
 #     directory="courses",
 #     upload_file="../testdata/files/image.png"
 # )
-create_file_request = CreateFileRequestSchema(upload_file="../testdata/files/image.png")
+create_file_request = CreateFileRequestSchema(upload_file="../../testdata/files/image.png")
 create_file_response = files_client.create_file(create_file_request)
 print('Create file data:', create_file_response)
 

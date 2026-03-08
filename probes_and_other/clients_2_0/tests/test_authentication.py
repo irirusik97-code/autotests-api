@@ -1,9 +1,9 @@
 from http import HTTPStatus
 
-from clients_2_0.users.public_users_client_2_0 import get_public_users_client
-from clients_2_0.authentication.authentication_client_2_0 import get_authentication_client
-from clients_2_0.users.users_schema_2_0 import CreateUserRequestSchema
-from clients_2_0.authentication.authentication_schema_2_0 import LoginRequestSchema, LoginResponseSchema
+from probes_and_other.clients_2_0.users.public_users_client_2_0 import get_public_users_client
+from probes_and_other.clients_2_0.authentication.authentication_client_2_0 import get_authentication_client
+from probes_and_other.clients_2_0.users.users_schema_2_0 import CreateUserRequestSchema
+from probes_and_other.clients_2_0.authentication.authentication_schema_2_0 import LoginRequestSchema, LoginResponseSchema
 from tools.assertions.schema import validate_json_schema
 from tools.assertions.base import assert_status_code
 from tools.assertions.authentication import assert_login_response

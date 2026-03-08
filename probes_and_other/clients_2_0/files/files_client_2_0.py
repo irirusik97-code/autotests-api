@@ -1,8 +1,7 @@
-from typing import TypedDict
 import httpx
-from clients_2_0.api_clients_2_0 import APIClient
-from clients_2_0.private_http_builder_2_0 import get_private_http_client, AuthenticationUserSchema
-from clients_2_0.files.files_schema_2_0 import CreateFileRequestSchema, CreateFileResponseSchema
+from probes_and_other.clients_2_0.api_clients_2_0 import APIClient
+from probes_and_other.clients_2_0.private_http_builder_2_0 import get_private_http_client, AuthenticationUserSchema
+from probes_and_other.clients_2_0.files.files_schema_2_0 import CreateFileRequestSchema, CreateFileResponseSchema
 
 # class File(TypedDict):
 #     """

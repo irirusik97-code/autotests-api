@@ -3,12 +3,16 @@ from clients_3_0.schema.all_schemas_3_0 import *
 from clients_3_0.users.public_users_client_3_0 import get_public_users_client, PublicUsersClient
 from tools.helpers.parsing_api_response import parse_api_response
 from clients_3_0.users.private_users_client_3_0 import get_private_users_client, PrivateUsersClient
+from httpx import Response
 
 
 # Модель для агрегации возвращаемых данных фикстурой function_user
 class UserFixture(BaseModel):
+    model_config = ConfigDict(arbitrary_types_allowed=True)
+
     request: CreateUserRequestSchema
     response: CreateUserResponseSchema
+    response_object: Response
 
     @property
     def email(self) -> EmailStr:  # Быстрый доступ к email пользователя
@@ -31,7 +35,8 @@ def function_user(public_users_client: PublicUsersClient) -> UserFixture:
     pydantic_object_create_user_api_response = parse_api_response(CreateUserResponseSchema, create_user_api_response)
 
     return UserFixture(request=create_user_api_request,
-                       response=pydantic_object_create_user_api_response)  # Возвращаем все нужные данные
+                       response=pydantic_object_create_user_api_response,
+                       response_object=create_user_api_response)  # Возвращаем все нужные данные
 
 @pytest.fixture  # Объявляем фикстуру, по умолчанию скоуп function, то что нам нужно
 def public_users_client() -> PublicUsersClient:  # Аннотируем возвращаемое фикстурой значение

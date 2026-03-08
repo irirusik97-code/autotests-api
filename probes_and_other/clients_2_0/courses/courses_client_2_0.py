@@ -1,12 +1,9 @@
 import httpx
-from clients_2_0.api_clients_2_0 import APIClient
-from typing import TypedDict
-from clients_2_0.private_http_builder_2_0 import get_private_http_client, AuthenticationUserSchema
+from probes_and_other.clients_2_0.api_clients_2_0 import APIClient
+from probes_and_other.clients_2_0.private_http_builder_2_0 import get_private_http_client, AuthenticationUserSchema
 # from clients_2_0.files.files_client_2_0 import File
-from clients_2_0.files.files_schema_2_0 import FileSchema
-from clients_2_0.users.users_schema_2_0 import UserSchema
-from clients_2_0.courses.courses_schema_2_0 import (GetCoursesQuerySchema, CreateCourseRequestSchema,
-                                                    UpdateCourseRequestSchema, CreateCourseResponseSchema)
+from probes_and_other.clients_2_0.courses.courses_schema_2_0 import (GetCoursesQuerySchema, CreateCourseRequestSchema,
+                                                                     UpdateCourseRequestSchema, CreateCourseResponseSchema)
 
 
 # class Course(TypedDict):

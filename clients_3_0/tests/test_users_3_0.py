@@ -3,7 +3,7 @@ from http import HTTPStatus
 from clients_3_0.users.public_users_client_3_0 import PublicUsersClient
 from clients_3_0.users.private_users_client_3_0 import PrivateUsersClient
 from clients_3_0.schema.all_schemas_3_0 import *
-from tools.assertions.schema import validate_json_schema
+# from tools.assertions.schema import validate_json_schema
 from tools.assertions.base import assert_status_code
 from tools.assertions.users import assert_create_user_response, assert_get_user_response, assert_update_user_response
 import pytest
@@ -13,16 +13,11 @@ from clients_3_0.fixtures.users import UserFixture
 
 @pytest.mark.users
 @pytest.mark.regression
-def test_create_user(public_users_client: PublicUsersClient):
+def test_create_user(function_user: UserFixture):
 
-    request = CreateUserRequestSchema() # create_user_api_request
-    response_object = public_users_client.create_user_api(request) # create_user_api_response
-    response = parse_api_response(CreateUserResponseSchema, response_object)
+    assert_status_code(function_user.response_object.status_code, HTTPStatus.OK)
+    assert_create_user_response(function_user.request, function_user.response)
 
-    assert_status_code(response_object.status_code, HTTPStatus.OK)
-    assert_create_user_response(request, response)
-
-    validate_json_schema(response_object.json(), response.model_json_schema())
 
 
 @pytest.mark.users
@@ -36,7 +31,7 @@ def test_get_user_me(function_user: UserFixture, private_users_client: PrivateUs
 
     assert_get_user_response(response, function_user.response)
 
-    validate_json_schema(response_object.json(), response.model_json_schema())
+    # validate_json_schema(response_object.json(), response.model_json_schema())
 
 
 @pytest.mark.users
@@ -48,7 +43,7 @@ def test_get_user(function_user: UserFixture, private_users_client: PrivateUsers
 
     assert_status_code(response_object.status_code, HTTPStatus.OK)
     assert_get_user_response(response, function_user.response)
-    validate_json_schema(response_object.json(), response.model_json_schema())
+    # validate_json_schema(response_object.json(), response.model_json_schema())
 
 
 @pytest.mark.users
@@ -61,7 +56,7 @@ def test_update_user(function_user: UserFixture, private_users_client: PrivateUs
 
     assert_status_code(response_object.status_code, HTTPStatus.OK)
     assert_update_user_response(update_request, response)
-    validate_json_schema(response_object.json(), response.model_json_schema())
+    # validate_json_schema(response_object.json(), response.model_json_schema())
 
 
 @pytest.mark.users

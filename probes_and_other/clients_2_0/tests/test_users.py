@@ -1,7 +1,7 @@
 from http import HTTPStatus
 
-from clients_2_0.users.public_users_client_2_0 import get_public_users_client
-from clients_2_0.users.users_schema_2_0 import CreateUserRequestSchema, CreateUserResponseSchema
+from probes_and_other.clients_2_0.users.public_users_client_2_0 import get_public_users_client
+from probes_and_other.clients_2_0.users.users_schema_2_0 import CreateUserRequestSchema, CreateUserResponseSchema
 from tools.assertions.schema import validate_json_schema
 from tools.assertions.base import assert_status_code
 from tools.assertions.users import assert_create_user_response

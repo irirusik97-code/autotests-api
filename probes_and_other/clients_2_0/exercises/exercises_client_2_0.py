@@ -1,9 +1,8 @@
 import httpx
-from clients_2_0.api_clients_2_0 import APIClient
-from typing import TypedDict
-from clients_2_0.private_http_builder_2_0 import get_private_http_client, AuthenticationUserSchema
-from clients_2_0.exercises.exercises_schema_2_0 import (GetExercisesQuerySchema, CreateExercisesRequestSchema,
-                                                        UpdateExercisesRequestSchema, CreateExerciseResponseSchema)
+from probes_and_other.clients_2_0.api_clients_2_0 import APIClient
+from probes_and_other.clients_2_0.private_http_builder_2_0 import get_private_http_client, AuthenticationUserSchema
+from probes_and_other.clients_2_0.exercises.exercises_schema_2_0 import (GetExercisesQuerySchema, CreateExercisesRequestSchema,
+                                                                         UpdateExercisesRequestSchema, CreateExerciseResponseSchema)
 
 # class Exercise(TypedDict):
 #     """

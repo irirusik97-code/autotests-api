@@ -1,9 +1,8 @@
 # from clients_2_0.authentication.authentication_schema_2_0 import TokenSchema
 #
 # print(TokenSchema.model_json_schema())
-import jsonschema
-from clients_2_0.users.public_users_client_2_0 import get_public_users_client
-from clients_2_0.users.users_schema_2_0 import CreateUserRequestSchema, CreateUserResponseSchema
+from probes_and_other.clients_2_0.users.public_users_client_2_0 import get_public_users_client
+from probes_and_other.clients_2_0.users.users_schema_2_0 import CreateUserRequestSchema, CreateUserResponseSchema
 from tools.assertions.schema import validate_json_schema
 from tools.fakers import fake
 

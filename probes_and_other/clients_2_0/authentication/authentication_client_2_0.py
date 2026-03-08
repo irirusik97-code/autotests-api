@@ -1,8 +1,7 @@
 import httpx
-from clients_2_0.api_clients_2_0 import APIClient
-from typing import TypedDict
-from clients_2_0.public_http_builder_2_0 import get_public_http_client
-from clients_2_0.authentication.authentication_schema_2_0 import LoginRequestSchema, RefreshTokenRequestSchema, LoginResponseSchema
+from probes_and_other.clients_2_0.api_clients_2_0 import APIClient
+from probes_and_other.clients_2_0.public_http_builder_2_0 import get_public_http_client
+from probes_and_other.clients_2_0.authentication.authentication_schema_2_0 import LoginRequestSchema, RefreshTokenRequestSchema, LoginResponseSchema
 
 
 # class Token(TypedDict):

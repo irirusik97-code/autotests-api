@@ -1,9 +1,9 @@
 import httpx
-from clients_2_0.api_clients_2_0 import APIClient
+from probes_and_other.clients_2_0.api_clients_2_0 import APIClient
 
-from clients_2_0.private_http_builder_2_0 import get_private_http_client, AuthenticationUserSchema
+from probes_and_other.clients_2_0.private_http_builder_2_0 import get_private_http_client, AuthenticationUserSchema
 
-from clients_2_0.users.users_schema_2_0 import UpdateUserRequestSchema, GetUserResponseSchema
+from probes_and_other.clients_2_0.users.users_schema_2_0 import UpdateUserRequestSchema, GetUserResponseSchema
 
 # class User(TypedDict):
 #     """
