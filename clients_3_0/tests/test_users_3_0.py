@@ -11,13 +11,24 @@ from tools.helpers.parsing_api_response import parse_api_response
 from clients_3_0.fixtures.users import UserFixture
 
 
+# @pytest.mark.users
+# @pytest.mark.regression
+# def test_create_user(function_user: UserFixture):
+#
+#     assert_status_code(function_user.response_object.status_code, HTTPStatus.OK)
+#     assert_create_user_response(function_user.request, function_user.response)
+
+
 @pytest.mark.users
 @pytest.mark.regression
-def test_create_user(function_user: UserFixture):
+@pytest.mark.parametrize("email", ["mail.ru", "gmail.com", "example.com"])
+def test_create_user(email: str, public_users_client: PublicUsersClient):
+    request = CreateUserRequestSchema(email=fake.email(domain=email))
+    response = public_users_client.create_user_api(request)
+    response_data = CreateUserResponseSchema.model_validate_json(response.text)
 
-    assert_status_code(function_user.response_object.status_code, HTTPStatus.OK)
-    assert_create_user_response(function_user.request, function_user.response)
-
+    assert_status_code(response.status_code, HTTPStatus.OK)
+    assert_create_user_response(request, response_data)
 
 
 @pytest.mark.users
